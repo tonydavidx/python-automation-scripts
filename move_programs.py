@@ -7,7 +7,6 @@ dest = "F:/Programs/"
 extentsions = ["exe", "msi"]
 programs = []
 
-
 for e in extentsions:
     for file in glob.glob(src + "*." + e):
         programs.append(file)

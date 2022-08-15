@@ -2,6 +2,7 @@ import watchdog.events
 import watchdog.observers
 import time
 import shutil
+import zipfile
 
 download_folder = "D:\Downloads"
 
@@ -20,10 +21,13 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         print("Modified:", event.src_path)
         format = event.src_path.split(".")[-1]
         name = event.src_path.split("\\")[-1].split(".")[0]
-        shutil.unpack_archive(
-            event.src_path, download_folder + "\\" + name, format=format
-        )
-        print(f"Unpacked {event.src_path}")
+        try:
+            shutil.unpack_archive(
+                event.src_path, download_folder + "\\" + name, format=format
+            )
+            print(f"Unpacked {event.src_path}")
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":
